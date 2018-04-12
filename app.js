@@ -59,19 +59,29 @@ const app = new Vue({
     toggleDetails: function(media){
       media.showDetail = !media.showDetail;
     },
+    // I was suprised to see that you could reference `event`
+    // even if you didn't include it as a parameter in your function.
     filterList: function(){
       this.type = event.target.value;
     }
   }, 
   computed: {
     uniqueItemsList: function(){
-      const tags = [];
-      this.mediaList.forEach((item) => {
-        if (!tags.includes(item.tag)){
-          tags.push(item.tag);
-        }
-      });
-      return tags;
+      // Here's an alternative way to get the unique tags from your list of media items.
+      return this.mediaList
+        .map(item => item.tag)
+        .filter((item, index, array) => array.indexOf(item) === index);
+
+      // And another that uses a Set.
+      // return [...new Set(this.mediaList.map(item => item.tag))];
+
+      // const tags = [];
+      // this.mediaList.forEach((item) => {
+      //   if (!tags.includes(item.tag)){
+      //     tags.push(item.tag);
+      //   }
+      // });
+      // return tags;
     }
   }
 });
