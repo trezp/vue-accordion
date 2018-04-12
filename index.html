@@ -12,12 +12,16 @@
   <div class="container">
     <div id="media-list">
       <h1>{{ title }}</h1>
+      <!-- You could alternatively use a v-model binding here to track changes to the 'type' -->
+      <!-- Are the 'name' and 'id' attributes necessary here? -->
       <select v-on:change="filterList" name="" id="">
         <option value="">Select a type of media...</option>
+        <!-- The v-bind:value binding isn't required here -->
         <option v-for="item in uniqueItemsList" 
                 v-bind:value="item">{{item}}</option>
       </select>
       <ul>
+        <!-- Using a v-show directive on the h3 element only hides the element; alternatively, you could add a v-if directive to the li element v-if="media.type === type || type === ''" to filter the list -->
         <li v-for="media in mediaList">
           <h3 
             v-on:click="toggleDetails(media)"
@@ -28,6 +32,7 @@
 
           <div v-show="media.showDetail">
             <p>{{ media.description }}</p>
+            <!-- Maybe use a v-if directive here so you're not rendering these elements if there's not a contributor property value? -->
             <p v-show="media.contributor">By: {{ media.contributor }}</p>
           </div>
         </li>
