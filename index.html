@@ -21,12 +21,12 @@
           <h3 
             v-on:click="toggleDetails(media)"
             v-show="type === '' || type === media.type"
-            v-bind:class="{ more: !media.showDetail, less: media.showDetail}">
+            v-bind:class="{ less: media.showDetail, more: !media.showDetail}">
             {{ media.title }}
           </h3> 
 
           <div v-show="media.showDetail">
-            <p>{{ media.description }}</p>
+            <p v-text="media.description"></p>
             <p v-if="media.contributor">By: {{ media.contributor }}</p>
           </div>
         </li>

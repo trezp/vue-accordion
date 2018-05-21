@@ -52,16 +52,16 @@ const app = new Vue({
         type: 'streaming video',
         contributor: '',
         showDetail: false,
-      }
+      },
     ]
   },
   methods: {
     toggleDetails: function(media){
       media.showDetail = !media.showDetail;
     },
-    filterList: function(){
+    filterList: function(event){
       this.type = event.target.value;
-    }
+    }, 
   }, 
   computed: {
     uniqueItemsList: function(){
