@@ -16,18 +16,15 @@
         <option value="">Select a type of media...</option>
         <option v-for="item in uniqueItemsList">{{item}}</option>
       </select>
-      <ul>
-        <li v-for="media in mediaList">
-          <h3 
+       <ul>
+        <li v-for="media in mediaList"
             v-on:click="toggleDetails(media)"
             v-show="type === '' || type === media.type"
-            v-bind:class="{ less: media.showDetail, more: !media.showDetail}">
-            {{ media.title }}
-          </h3> 
-
+            v-bind:class="[{ less: media.showDetail, more: !media.showDetail }, media.type.toLowerCase()]">
+          <h3>{{ media.title }}</h3> 
           <div v-show="media.showDetail">
             <p v-text="media.description"></p>
-            <p v-if="media.contributor">By: {{ media.contributor }}</p>
+            <p class="byline" v-if="media.contributor">By: {{ media.contributor }}</p>
           </div>
         </li>
       </ul>
